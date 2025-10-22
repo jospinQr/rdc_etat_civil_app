@@ -1,9 +1,7 @@
-package org.megamind.rdc_etat_civil_app.navigation
+package org.megamind.rdc_etat_civil_app.ui.navigation
 
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.internal.composableLambda
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowSizeClass
 import org.megamind.rdc_etat_civil_app.ui.screen.auth.LoginScreen
+import org.megamind.rdc_etat_civil_app.ui.screen.main.MainScreen
 
 
 @Composable
@@ -25,10 +24,22 @@ fun AppNavHost(
         composable(route = Destination.LOGIN.name) {
 
             LoginScreen(
-                windowSizeClass=windowSizeClass,
-                onNavigateToMain = {}
+                windowSizeClass = windowSizeClass,
+                onNavigateToMain = {
+                    navController.navigate(Destination.MAIN.name) {
+                        popUpTo(Destination.LOGIN.name) {
+                            inclusive = true
+                        }
+                    }
+                }
             )
 
+        }
+
+
+        composable(route= Destination.MAIN.name) {
+
+            MainScreen()
         }
     }
 }

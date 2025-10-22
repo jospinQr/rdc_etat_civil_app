@@ -30,6 +30,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -60,17 +61,29 @@ fun LoginScreen(
 ) {
 
     val uiState by viewModel.authUiState.collectAsStateWithLifecycle()
+    val uiEvent = viewModel.authUiEvent
+
+    LaunchedEffect(viewModel) {
+
+        uiEvent.collect {
+            when (it) {
+                AuthUiEvent.NavigateToMain -> {
+                    onNavigateToMain()
+                }
+            }
+        }
+    }
 
     LoginScreenContent(
         uiState = uiState,
         onNameChange = viewModel::onNameChange,
         onPasswordChange = viewModel::onPasswordChange,
         windowSizeClass = windowSizeClass,
-        onLogin = { /*TODO*/ },
+        onLogin = { viewModel.onLogin() },
         onPassWordVisibilityChange = viewModel::onPassWordVisibilityChange,
-        onErrorDialogDismiss= viewModel::onErrorDialogDismiss
+        onErrorDialogDismiss = viewModel::onErrorDialogDismiss
 
-        )
+    )
 
 }
 
@@ -80,12 +93,12 @@ fun LoginScreenContent(
     uiState: AuthUiState,
     onNameChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
-    onLogin : ()->Unit,
-    onPassWordVisibilityChange : ()->Unit,
-    onErrorDialogDismiss: ()->Unit
+    onLogin: () -> Unit,
+    onPassWordVisibilityChange: () -> Unit,
+    onErrorDialogDismiss: () -> Unit
 ) {
     val isCompact = windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT
-    Scaffold { innerPadding->
+    Scaffold { innerPadding ->
         Box(modifier = Modifier.fillMaxSize().imePadding(), contentAlignment = Alignment.Center) {
 
             Crossfade(
@@ -219,6 +232,8 @@ private fun LoginCard(
             Button(modifier = Modifier.fillMaxWidth(.5f), onClick = onLogin) {
                 Text(text = "Login", color = MaterialTheme.colorScheme.onPrimary)
             }
+            Spacer(modifier = Modifier.height(12.dp))
+
 
         }
     }

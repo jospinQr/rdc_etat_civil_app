@@ -56,6 +56,8 @@ kotlin {
             implementation(libs.multiplatform.settings)
             implementation(libs.okio)
             implementation(libs.adaptive)
+
+            implementation(libs.java.jwt)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

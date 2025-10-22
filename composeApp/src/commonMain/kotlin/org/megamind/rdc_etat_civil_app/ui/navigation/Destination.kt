@@ -1,4 +1,4 @@
-package org.megamind.rdc_etat_civil_app.navigation
+package org.megamind.rdc_etat_civil_app.ui.navigation
 
 enum class Destination(route: String) {
 

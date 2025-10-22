@@ -8,6 +8,6 @@ fun initKoin(configuration: KoinAppDeclaration? = null) {
 
     startKoin {
         configuration?.invoke(this)
-        modules(mainModule)
+        modules(mainModule, ktorModule)
     }
 }
