@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Lock
@@ -35,6 +36,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -50,6 +52,7 @@ import org.megamind.yangu_stock.ui.components.ErrorDialog
 import org.megamind.yangu_stock.ui.components.LoadinDialog
 import rdc_etat_civil_app.composeapp.generated.resources.Res
 import rdc_etat_civil_app.composeapp.generated.resources.compose_multiplatform
+import rdc_etat_civil_app.composeapp.generated.resources.congo
 
 @Composable
 fun LoginScreen(
@@ -109,7 +112,7 @@ fun LoginScreenContent(
                 if (isCompact) {
 
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Logo(size = 72.dp)
+                        Logo(size = 78.dp)
                         Spacer(modifier = Modifier.height(16.dp))
                         LoginCard(
                             uiState,
@@ -124,7 +127,7 @@ fun LoginScreenContent(
                 } else {
                     //Layout horizontal pour tablette/desktop
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Logo(168.dp)
+                        Logo(178.dp)
                         Spacer(modifier = Modifier.width(32.dp))
                         LoginCard(
                             uiState,
@@ -160,7 +163,7 @@ fun LoginScreenContent(
 
 
 @Composable
-private fun Logo(size: Dp) {
+fun Logo(size: Dp) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
         Text(
@@ -176,9 +179,10 @@ private fun Logo(size: Dp) {
 
 
         Image(
-            modifier = Modifier.size(size = size).clip(RoundedCornerShape(100)),
-            painter = painterResource(Res.drawable.compose_multiplatform),
-            contentDescription = null
+
+            modifier = Modifier.size(size = size).clip(CircleShape),
+            painter = painterResource(Res.drawable.congo),
+            contentDescription = null, contentScale = ContentScale.Crop
         )
 
     }

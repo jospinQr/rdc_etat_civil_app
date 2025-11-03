@@ -4,6 +4,20 @@ enum class Destination(route: String) {
 
 
     LOGIN("login"),
-    MAIN("Main")
+    MAIN("admin_main"),
+
+    DASHBOARD("dashboard"),
+
+    MARIAGE("mariage"),
+
+    NAISSANCE("naissance"),
+
+    DECES("deces"),
+
+    SETTINGS("settings")
+
+
+
+
 
 }

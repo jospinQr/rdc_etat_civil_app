@@ -97,7 +97,7 @@ data class AuthUiState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
     val isPassWordVisible: Boolean = false,
-    val userInfo: UserInfoResponse = UserInfoResponse(username = "", role = Role.CB, 1, 0, 0)
+    val userInfo: UserInfoResponse = UserInfoResponse(username = "", role = Role.CB, 0, 0, 0)
 )
 
 sealed class AuthUiEvent() {
